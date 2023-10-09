@@ -34,5 +34,9 @@ namespace CS_Lesson_5
         public abstract int GetSpeedWrite();
         public abstract int GetSpeedRead();
 
+        public abstract bool RecordToStorage(int fileSize);
+
+        public abstract void ClearMemoryStorage();
+
     }
 }

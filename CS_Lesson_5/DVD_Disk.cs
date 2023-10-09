@@ -12,6 +12,7 @@ namespace CS_Lesson_5
         private int writeSpeed;
         private bool doubleSided;       // если односторонний, то 0, если двухсторонний 1
         private int memoryVolume;       // объём памяти в Мб
+        private int busyMemory = 0;
         public DVD_Disk() { }
         public DVD_Disk(string name, string model, int readSpeed, int writeSpeed, bool doubleSided)
             : base(name, model)
@@ -61,6 +62,21 @@ namespace CS_Lesson_5
         public override int GetSpeedRead()
         {
             return this.readSpeed;
+        }
+
+        public override bool RecordToStorage(int fileSize)
+        {
+            if (fileSize <= this.memoryVolume - this.busyMemory)
+            {
+                busyMemory += fileSize;
+                return true;
+            }
+            return false;
+        }
+
+        public override void ClearMemoryStorage()
+        {
+            busyMemory = 0;
         }
 
     }

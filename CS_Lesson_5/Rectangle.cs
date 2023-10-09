@@ -11,7 +11,7 @@ namespace CS_Lesson_5
         public int width;
         public int height;
 
-        public Rectangle(int width, int height) 
+        public Rectangle(int width, int height, byte color) : base(color) 
         {
             this.width = width;
             this.height = height;
@@ -19,25 +19,28 @@ namespace CS_Lesson_5
 
         public override void Show()
         {
+            SetColor();
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
                     if (i == 0 || i == height - 1)
                     {
-                        Console.Write("O");
+                        Console.Write("O ");
                     }
                     else if (j == 0 || j == width - 1)
                     {
-                        Console.Write("O");
+                        Console.Write("O ");
                     }
                     else
                     {
-                        Console.Write(" ");
+                        Console.Write("  ");
                     }
                 }
                 Console.WriteLine();
             }
+            Console.ResetColor();
+
         }
     }
 }

@@ -11,7 +11,8 @@ namespace CS_Lesson_5
         private int speedUSB20;
         private int numbersOfSections;
         private int sectionVolume;
-        private int volume;
+        private int memoryVolume;
+        private int busyMemory = 0;
 
         public RemovableHDD() { }
         public RemovableHDD(string name, string model,
@@ -21,12 +22,12 @@ namespace CS_Lesson_5
             this.speedUSB20 = speed;
             this.numbersOfSections = numberOfSections;
             this.sectionVolume = sectionVolume;
-            volume = numberOfSections * sectionVolume;
+            this.memoryVolume = numberOfSections * sectionVolume;
         }
 
         public override int GetMemory()
         {
-            return volume;
+            return this.memoryVolume;
         }
 
         public override int GetSpeedWrite()
@@ -37,6 +38,21 @@ namespace CS_Lesson_5
         public override int GetSpeedRead()
         {
             return this.speedUSB20;
+        }
+
+        public override bool RecordToStorage(int fileSize)
+        {
+            if (fileSize <= this.memoryVolume - this.busyMemory)
+            {
+                busyMemory += fileSize;
+                return true;
+            }
+            return false;
+        }
+
+        public override void ClearMemoryStorage()
+        {
+            busyMemory = 0;
         }
 
     }
